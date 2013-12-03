@@ -9,6 +9,7 @@ included. Check out the demo file.
 To run the demo:
 make
 ./fixeddemo
-gnuplot
-> plot "ecg_filtered.dat" with lines
 
+gnuplot
+
+> plot "ecg_filtered.dat" with lines
