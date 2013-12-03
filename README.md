@@ -7,7 +7,9 @@ There are no cpp files. Just the header file needs to be
 included. Check out the demo file.
 
 To run the demo:
+
 make
+
 ./fixeddemo
 
 gnuplot
