@@ -4,7 +4,7 @@ This header file has been taken from:
 "A Collection of Useful C++ Classes for Digital Signal Processing"
 By Vinnie Falco 
 
-Bernd Porr adapted it for Linux and turned it into class using
+Bernd Porr adapted it for Linux and turned it into a filter using
 fixed point arithmetic.
 
 --------------------------------------------------------------------------------
@@ -43,8 +43,9 @@ class DirectFormI
 public:
 	// constructor with the coefficients b0,b1,b2 for the FIR part
         // and a1,a2 for the IIR part. a0 is always one.
-	// q defines the number of bits the result needs to be shifted
-	// because the coefficients have been scaled up by 2^q 
+	// the coefficients have been scaled up by the factor
+	// 2^q which need to scaled down by this factor after every
+	// time step which is taken care of.
 	DirectFormI(const short int b0, const short int b1, const short int b2, 
 		    const short int a1, const short int a2, 
 		    const short int q = 15)
@@ -69,23 +70,26 @@ public:
 		m_y2 = 0;
 	}
 
-	// filtering operation
+	// filtering operation: one sample in and one out
 	short int filter(const short int in)
 	{
-		// calculate the output in one operation
-		int out = ( c_b0*in 
-			    + c_b1*m_x1 
-			    + c_b2*m_x2
-			    - c_a1*m_y1 
-			    - c_a2*m_y2 ) >> q_scaling;
+		// calculate the output
+		int out_upscaled = (int)c_b0*(int)in
+			+ (int)c_b1*(int)m_x1 
+			+ (int)c_b2*(int)m_x2
+			- (int)c_a1*(int)m_y1 
+			- (int)c_a2*(int)m_y2;
 
-		// update delay lines
+		// scale it back from int to short int
+		short int out = out_upscaled >> q_scaling;
+
+		// update the delay lines
 		m_x2 = m_x1;
 		m_y2 = m_y1;
 		m_x1 = in;
 		m_y1 = out;
 
-		return (short int)out;
+		return out;
 	}
 	
 private:
