@@ -1,0 +1,31 @@
+iir_fixed_point
+===============
+
+This is a very compact fixed point 2nd order IIR filter implementation.
+
+The data and coefficients are short int and the accumulator
+is int.
+
+The coefficients need to be scaled up by 2^q and then the filter
+scales them back by a bitshift. The argument q in the constructor
+tells the filter how many bits need to be shaved off to obtain the
+unscaled result.
+
+Just the header file 'DirectFormI.h' needs to be included and then the
+filter can be used. The constructor sets the coefficients and tells
+the filter the scaling factor q of the coefficients as a power of 2.
+The filtering method is called "filter" and takes one short int sample
+and outputs a short int sample.
+
+Check out the demo file which also contains the octave commands to
+generate the filter coefficients.
+
+To run the demo:
+
+make
+
+./fixeddemo
+
+gnuplot
+
+> plot "ecg_filtered.dat" with lines
