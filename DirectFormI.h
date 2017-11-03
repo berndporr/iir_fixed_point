@@ -61,6 +61,23 @@ public:
 		c_a2 = a2;
 		reset();
 	}
+
+	// convenience function which takes the a0 argument but ignores it!
+	DirectFormI(const short int b0, const short int b1, const short int b2, 
+		    const short int, const short int a1, const short int a2, 
+		    const short int q = 15)
+	{
+		// coefficients are scaled by factor 2^q
+		q_scaling = q;
+		// FIR coefficients
+		c_b0 = b0;
+		c_b1 = b1;
+		c_b2 = b2;
+		// IIR coefficients
+		c_a1 = a1;
+		c_a2 = a2;
+		reset();
+	}
 	
 	void reset ()
 	{

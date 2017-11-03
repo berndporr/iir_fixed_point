@@ -8,10 +8,9 @@ is of type int.
 
 The coefficients need to be scaled up by 2^q and then the filter
 scales its output back with a bitshift after every time step. q is the
-last argument in the constructor. The easiest approach is to multiply
-the original floating point coeffcients by (1<<q) in the constructor
-of the filter and then the constructor converts them into short ints
-automatically.
+last argument in the constructor. See the python script:
+gen_coeff.py which generates the fixed point coefficients for our
+bandstop.
 
 Useage: Just the header file 'DirectFormI.h' needs to be included in
 your code. There are no library files to be included. The constructor
@@ -26,21 +25,11 @@ The filtering method is called "filter" which takes one
 short int sample and outputs a short int sample and takes care
 of the scaling.
 
-The filter is explained in detail in this youTube playlist:
-https://www.youtube.com/playlist?list=PLxWwb-b9LnpAVSAL_Q1x9HiTXtvBbFFRd
-
-Check out the demo file which also contains the octave commands to
-generate the filter coefficients for a bandstop filter.
-
-To run the demo:
+To run the demo which filters out 50Hz from an ECG:
 
 make
-
 ./fixeddemo
-
-gnuplot
-
-> plot "ecg_filtered.dat" with lines
+python3 ./plot_ecg.py
 
 Enjoy!
 /Bernd Porr (mail@berndporr.me.uk)
