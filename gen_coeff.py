@@ -20,15 +20,18 @@ scaling_factor = 2**q
 # let's generate a sequence of 2nd order IIR filters
 sos = signal.butter(2,[f1/fs*2,f2/fs*2],'stop',output='sos')
 
+sos = np.round(sos * scaling_factor)
+
 # print coefficients
 for biquad in sos:
-    int_coeffs = np.round(biquad * scaling_factor)
-    for int_coeff in int_coeffs:
-        print(int(int_coeff),",",sep="",end="")
+    for coeff in biquad:
+        print(int(coeff),",",sep="",end="")
     print(q)
 
 # plot the frequency response
 b,a = signal.sos2tf(sos)
 w,h = signal.freqz(b,a)
-pl.plot(w/np.pi/2*fs,np.abs(h))
+pl.plot(w/np.pi/2*fs,20*np.log(np.abs(h)))
+pl.xlabel('frequency/Hz');
+pl.ylabel('gain/dB');
 pl.show()
