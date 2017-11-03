@@ -1,5 +1,6 @@
-iir_fixed_point
-===============
+# iir_fixed_point
+
+![alt tag](iir_demo_plot.png)
 
 This is a compact fixed point 2nd order IIR filter implementation.
 
@@ -12,7 +13,9 @@ last argument in the constructor. See the python script:
 gen_coeff.py which generates the fixed point coefficients for our
 bandstop.
 
-Useage: Just the header file 'DirectFormI.h' needs to be included in
+## Useage
+
+Just the header file 'DirectFormI.h' needs to be included in
 your code. There are no library files to be included. The constructor
 sets the coefficients (a_x are the feedback coefficients and b_x the
 feedforward ones) and tells the filter the scaling factor 2^q of the
@@ -25,11 +28,16 @@ The filtering method is called "filter" which takes one
 short int sample and outputs a short int sample and takes care
 of the scaling.
 
+## Demo
+
 To run the demo which filters out 50Hz from an ECG:
 
 make
+
 ./fixeddemo
+
 python3 ./plot_ecg.py
 
 Enjoy!
+
 /Bernd Porr (mail@berndporr.me.uk)
