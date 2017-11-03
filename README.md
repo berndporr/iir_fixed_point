@@ -20,9 +20,11 @@ your code. There are no library files to be included. The constructor
 sets the coefficients (a_x are the feedback coefficients and b_x the
 feedforward ones) and tells the filter the scaling factor 2^q of the
 coefficients:
+```
         b_0 + b_1 z^-1 + b_2 z^-2
 H(z) = ---------------------------
         1 + a_1 z^-1 + a_2 z^-2
+```
 
 The filtering method is called "filter" which takes one
 short int sample and outputs a short int sample and takes care
@@ -32,11 +34,11 @@ of the scaling.
 
 To run the demo which filters out 50Hz from an ECG:
 
+```
 make
-
 ./fixeddemo
-
 python3 ./plot_ecg.py
+```
 
 Enjoy!
 
