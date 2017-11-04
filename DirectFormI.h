@@ -11,7 +11,7 @@ fixed point arithmetic.
 
 License: MIT License (http://www.opensource.org/licenses/mit-license.php)
 Copyright (c) 2009 by Vinnie Falco
-Copyright (C) 2013, Bernd Porr, mail@berndporr.me.uk
+Copyright (C) 2013-2017, Bernd Porr, mail@berndporr.me.uk
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -88,10 +88,10 @@ public:
 	}
 
 	// filtering operation: one sample in and one out
-	short int filter(const short int in)
+	inline short int filter(const short int in)
 	{
 		// calculate the output
-		int out_upscaled = (int)c_b0*(int)in
+		register int out_upscaled = (int)c_b0*(int)in
 			+ (int)c_b1*(int)m_x1 
 			+ (int)c_b2*(int)m_x2
 			- (int)c_a1*(int)m_y1 
